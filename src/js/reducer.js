@@ -37,7 +37,8 @@ const reducer = (state, action) => {
           ...state.user,
           socketId: action.payload.socketId,
           nickName: action.payload.nickName,
-          id: action.payload.id
+          id: action.payload.id,
+          role: action.payload.role
         },
         prevAction: action.type
       };

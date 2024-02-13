@@ -21,7 +21,8 @@ export const socketPlugin = {};
 
 window.onload = (e) => {
   const nickName = localStorage.getItem("nickName");
-  const socket = io("https://chat.hkound.pe.kr", 
+  // const socket = io("https://chat.hkound.pe.kr", 
+  const socket = io("http://localhost:8088", 
     { 
       transports: ["websocket"], 
       auth: { 
@@ -33,7 +34,8 @@ window.onload = (e) => {
   //! if(nickName) socketId update
   socket.on("first-connect", (res) => {
     // log(res.msg);
-    store.dispatch(initUserInfo({ socketId: socket.id, nickName, id: res.id }));
+    log(res);
+    store.dispatch(initUserInfo({ socketId: socket.id, nickName, id: res.id, role: res.role }));
     // if(nickName) store.dispatch(updateSocketId(socket.id));
   });
 

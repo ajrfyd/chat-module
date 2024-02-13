@@ -22,6 +22,7 @@ class ChatMain {
 
   init() {
     this.state = store.getState();
+    console.log(this.state.user);
     this.$main.innerHTML = `
       <h1>Welcome!</h1>
       <p>안녕하세요. 블로그 주인입니다:)</p>
