@@ -40,3 +40,5 @@ export const getUserDataMok = () => new Promise((resolve) => setTimeout(() => re
 
 export const removeClassAll = (iter, className) => go(iter, map(el => el.classList.remove(className)));
 export const getExitRoom = (iter, className) => go(iter, reject(c => c === className), ([a]) => a);
+
+export const scrollToBottom = ($target) => $target.scrollTo(0, $target.scrollHeight);

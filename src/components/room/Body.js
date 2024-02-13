@@ -1,5 +1,6 @@
 import { addClass, appendChild, createEl,
-  makeStrHtml, makeStrToEl, qs, qsa, getLocalItem
+  makeStrHtml, makeStrToEl, qs, qsa, getLocalItem,
+  scrollToBottom
 } from "../../js/utils.js";
 import { go, each } from "fxjs";
 import { store } from "../../main.js";
@@ -91,6 +92,7 @@ class Body {
       makeStrToEl,
       appendChild(qs(`.room-body.${this.roomName}`))
     );
+    scrollToBottom(qs(`.contents.${this.roomName}`));
   };
 };
 

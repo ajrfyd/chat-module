@@ -5,7 +5,9 @@ import { store } from "../main.js";
 import { requestStart, setUserData, initUserInfo,
   setMsgs
 } from "./action.js";
-import { removeNickNameInput, invalidHandler } from "../js/domController.js";
+import { removeNickNameInput, invalidHandler,
+  paintMsg
+} from "../js/domController.js";
 const { log } = console;
 // const socket = io("http://localhost:8088", { transports: ["websocket"] });
 
@@ -70,7 +72,8 @@ window.onload = (e) => {
     const { value } = $input;
     const { user } = store.getState();
     socket.emit(key, { socketId: user.socketId, msg: value, nickName: user.nickName, roomType: key === "room1" ? "A" : "B" });
-    socket.on("send-msg-success", console.log);
+    socket.on(`send-msg-success ${key}`, (data) => paintMsg(key, data));
+    console.log("sendMsgsgsgsgs", key);
   };
   socketPlugin.joinRoom = (roomName) => {
     store.dispatch(requestStart());

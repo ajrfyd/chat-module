@@ -61,7 +61,7 @@ class ChatBody {
     if(this.state.user.nickName) return;
     //! 이미 창이 열려 있는 경우 밑의 page추가될 필요 없음
     if(qs(".backdrop")) return;
-    console.log(qs(".backdrop"));
+    // console.log(qs(".backdrop"));
     
     //Todo this.state.user.isOpen true
     //Todo 추후 false변경 로직 필요

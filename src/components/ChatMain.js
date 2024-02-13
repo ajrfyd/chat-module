@@ -48,7 +48,7 @@ class ChatMain {
 
     // 오픈, 메뉴 안오픈, 나머지 오픈 리턴
     // 
-    console.log("%cMainPage Render", "color: purple");
+    // console.log("%cMainPage Render", "color: purple");
     
     this.render();
   };

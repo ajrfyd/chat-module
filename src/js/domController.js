@@ -1,6 +1,7 @@
 import { 
   createEl, addClass, qs, qsa, appendChild,
-  removeClassAll, getExitRoom
+  removeClassAll, getExitRoom, makeStrToEl,
+  scrollToBottom
 } from "./utils.js";
 import { socketPlugin } from "./socket.js";
 import { store } from "../main.js";
@@ -78,8 +79,24 @@ export const removeChatRoom = (key) => {
     if(rooms.length) room = rooms[0];
   } else room = qs(`.contents.${key === "room1" ? "room2" : "room1"}`);
   if(!room) return;
-  console.log(room,'afdalkfjgsahglkfgjghasdlkfgasdjkl');
   const roomName = getExitRoom(room.classList, "contents");
   socketPlugin.exitRoom(roomName);
   room.remove();
 }
+
+export const paintMsg = (key, data) => {
+  const $target = qs(`.contents.${key}`);
+  // console.log(qs(`.contents.${key}`), "!!!!!!!!!!")
+  const { id } = store.getState().user;
+  const msgStr = `
+    <div class="chat-content-body ${(id === data.create_user_id && !!data.msgType) ? "" : (id === data.create_user_id && !data.msgType) ? "me" : ""} ${data.msgType === "A" ? 'entered' : ''}">
+      <p class="chat-content">
+        ${data.msg}
+      </p>
+    </div>
+  `;
+  const msg = makeStrToEl(msgStr);
+  appendChild($target, msg);
+  scrollToBottom($target);
+  return;
+};
