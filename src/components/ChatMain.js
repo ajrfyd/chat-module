@@ -29,6 +29,10 @@ class ChatMain {
       <p>포스팅에 대한 궁금증은 질문 탭</p>
       <p>버그에 대한 제보는 제보 탭</p>
       <p>많은 관심 부탁 드립니다.</p>
+      <br/>
+      <p>현재 테스트 중입니다.</p>
+      <p>메세지 전송은 가능합니다.</p>
+      <p>답장은 구현 중입니다.</p>
     `;
     store.subscribe(this.setState.bind(this));
   };

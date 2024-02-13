@@ -1,8 +1,8 @@
-import ChatBtn from "./components/ChatBtn.js";
-import "./css/main.css";
-import createStore from "./js/store.js";
-import reducer from "./js/reducer.js";
-import { logger, thunk, compareState } from "./js/middlewares.js";
+import ChatBtn from "/src/components/ChatBtn.js";
+import "/src/css/main.css";
+import createStore from "/src/js/store.js";
+import reducer from "/src/js/reducer.js";
+import { logger, thunk, compareState } from "/src/js/middlewares.js";
 
 const body = parent.document.body || parent.document.documentElement;
 const root = body.querySelector("#root");

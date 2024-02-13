@@ -14,12 +14,14 @@ const { log } = console;
 // export const socket1 = io("http://localhost:8088/room1", { transports: ["websocket"] });
 // export const socket2 = io("http://localhost:8088/room2", { transports: ["websocket"] });
 
-const socketHandler = (roomName) => io(`http://localhost:8088/${roomName}`, { transports: ["websocket"] });
+// const socketHandler = (roomName) => io(`http://localhost:8088/${roomName}`, { transports: ["websocket"] });
+const socketHandler = (roomName) => io(`https://chat.hkound.pe.kr/${roomName}`, { transports: ["websocket"] });
+
 export const socketPlugin = {};
 
 window.onload = (e) => {
   const nickName = localStorage.getItem("nickName");
-  const socket = io("http://localhost:8088", 
+  const socket = io("https://chat.hkound.pe.kr", 
     { 
       transports: ["websocket"], 
       auth: { 
@@ -30,19 +32,19 @@ window.onload = (e) => {
 
   //! if(nickName) socketId update
   socket.on("first-connect", (res) => {
-    log(res.msg);
+    // log(res.msg);
     store.dispatch(initUserInfo({ socketId: socket.id, nickName, id: res.id }));
     // if(nickName) store.dispatch(updateSocketId(socket.id));
   });
 
   socket.on("not-exist-user", (msg) => {
-    log(msg);
+    // log(msg);
     localStorage.clear();
     store.dispatch(initUserInfo({ socketId: socket.id, nickName: null }));
   });
 
   socket.on("joined-room", (data) => {
-    console.log(data);
+    // console.log(data);
     const msgList = data.msgList;
     store.dispatch(setMsgs({ roomType: data.roomType === "A" ? "room1" : "room2", msgList }));
   });
@@ -73,7 +75,7 @@ window.onload = (e) => {
     const { user } = store.getState();
     socket.emit(key, { socketId: user.socketId, msg: value, nickName: user.nickName, roomType: key === "room1" ? "A" : "B" });
     socket.on(`send-msg-success ${key}`, (data) => paintMsg(key, data));
-    console.log("sendMsgsgsgsgs", key);
+    // console.log("sendMsgsgsgsgs", key);
   };
   socketPlugin.joinRoom = (roomName) => {
     store.dispatch(requestStart());
