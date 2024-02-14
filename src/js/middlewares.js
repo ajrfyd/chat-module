@@ -2,7 +2,7 @@ const { log } = console;
 
 export const logger = (store) => (dispatch) => (action) => {
   log("%c Prev State", "color: red", store.getState());
-  log(`%c Action: ${action.type}`, "color: green");
+  log(`%c Action: >>>> ${action.type} <<<<`, "color: green");
   dispatch(action);
   log("%c Current State", "color: blue", store.getState());
 };

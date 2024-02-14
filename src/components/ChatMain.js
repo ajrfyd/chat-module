@@ -22,24 +22,26 @@ class ChatMain {
 
   init() {
     this.state = store.getState();
-    console.log(this.state.user);
-    this.$main.innerHTML = `
-      <h1>Welcome!</h1>
-      <p>안녕하세요. 블로그 주인입니다:)</p>
-      <p>이곳은 질문 혹은 제보를 위해 만들어 졌습니다.</p>
-      <p>포스팅에 대한 궁금증은 질문 탭</p>
-      <p>버그에 대한 제보는 제보 탭</p>
-      <p>많은 관심 부탁 드립니다.</p>
-      <br/>
-      <p>현재 테스트 중입니다.</p>
-      <p>메세지 전송은 가능합니다.</p>
-      <p>답장은 구현 중입니다.</p>
-    `;
+    if(this.state.user.role === "user") {
+      this.$main.innerHTML = `
+        <h1>Welcome!</h1>
+        <p>안녕하세요. 블로그 주인입니다:)</p>
+        <p>이곳은 질문 혹은 제보를 위해 만들어 졌습니다.</p>
+        <p>포스팅에 대한 궁금증은 질문 탭</p>
+        <p>버그에 대한 제보는 제보 탭</p>
+        <p>많은 관심 부탁 드립니다.</p>
+        <br/>
+        <p>현재 테스트 중입니다.</p>
+        <p>메세지 전송은 가능합니다.</p>
+        <p>답장은 구현 중입니다.</p>
+      `;
+    };
+
     store.subscribe(this.setState.bind(this));
   };
 
   setState() {
-    const { isOpen: prevOpen, page: { main: {isOpen: prevMain} } } = this.state;
+    const { page: { main: {isOpen: prevMain} } } = this.state;
     const nextState = store.getState();
 
     //* 이전 메인 상태와 다름 상태가 같으면 
@@ -73,7 +75,6 @@ class ChatMain {
     //! render o
     // prev !open && open, main open 
     // 오픈, 메뉴 오픈
-
     if(this.state.page.main) this.$main.classList.add("show");
     // (this.state.isOpen && this.state.page.main) ? 
     // this.$main.classList.add("show") :

@@ -1,4 +1,4 @@
-import ChatBtn from "/src/components/ChatBtn.js";
+import ChatBtn from "/src/components/ChatBtn";
 import "/src/css/main.css";
 import createStore from "/src/js/store.js";
 import reducer from "/src/js/reducer.js";
@@ -19,4 +19,5 @@ console.log(`
 ██║  ██║██║  ██╗   
 ╚═╝  ╚═╝╚═╝  ╚═╝   
 `, "color: purple");
-body && root ? new ChatBtn(root) : console.warn("No root!")
+
+body && root ? new ChatBtn(root) : console.warn("No root!");
