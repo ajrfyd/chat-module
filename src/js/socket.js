@@ -22,8 +22,8 @@ export const socketPlugin = {};
 
 window.onload = (e) => {
   const nickName = localStorage.getItem("nickName");
-  // const socket = io("https://chat.hkound.pe.kr",
-  const socket = io("http://localhost:8088", {
+  const socket = io("https://chat.hkound.pe.kr", {
+    // const socket = io("http://localhost:8088", {
     transports: ["websocket"],
     auth: {
       nickName,
