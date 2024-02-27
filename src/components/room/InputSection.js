@@ -1,5 +1,9 @@
 import { appendChild, addClass, createEl } from "../../js/utils.js";
-import { socketPlugin } from "../../js/socket.js";
+import { store } from "../../main.js";
+import { setMsg } from "../../js/action.js";
+import { paintMsg } from "../../js/domController.js";
+import { url } from "../../js/api.js";
+import { sendMsg } from "../../js/api.js";
 
 class InputSection {
   constructor($target, roomName) {
@@ -23,22 +27,42 @@ class InputSection {
     appendChild(this.$wrapper, this.$input);
     appendChild(this.$wrapper, this.$btn);
     appendChild($target, this.$wrapper);
-  };
+  }
 
   init() {
     this.$input.addEventListener("keydown", (e) => {
-      if(e.key !== "Enter") return;
+      if (e.key !== "Enter") return;
       this.$btn.onclick();
     });
 
-    this.$btn.onclick = () => {
-      if(this.$input.value.length < 1) return (this.$input.classList.add("invalid"), this.$input.placeholder = "공백입니다.", setTimeout(() => this.$input.focus(), 1000));
-      if(this.$input.value.length >= 1) this.$input.placeholder = "";
-      socketPlugin.sendMsg(this.roomName, this.$input);
+    this.$btn.onclick = async () => {
+      if (this.$input.value.length < 1)
+        return (
+          this.$input.classList.add("invalid"),
+          (this.$input.placeholder = "공백입니다."),
+          setTimeout(() => this.$input.focus(), 1000)
+        );
+      if (this.$input.value.length >= 1) this.$input.placeholder = "";
+
+      const { value } = this.$input;
+      const { user } = store.getState();
+
+      const newMsg = {
+        socketId: user.socketId,
+        msg: value,
+        nickName: user.nickName,
+        roomType: this.roomName === "room1" ? "A" : "B",
+      };
+
+      const result = await sendMsg(newMsg);
+      const { message, result: newMessage } = result;
+      if (message !== "ok") return alert(message);
+      paintMsg(this.roomName, newMessage);
+      store.dispatch(setMsg(newMessage, this.roomName));
       this.$input.value = "";
       this.$input.focus();
     };
-  };
-};
+  }
+}
 
 export default InputSection;

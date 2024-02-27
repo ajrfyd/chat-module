@@ -1,13 +1,22 @@
-import { OPEN, CLOSE, MAIN, ROOM1, ROOM2, 
-  GET_USER_DATA, NOT_USER_DATA, REQUEST_ERROR,
-  SET_USER_DATA, REQUEST_START, REQUEST_SUCCESS, 
+import {
+  OPEN,
+  CLOSE,
+  MAIN,
+  ROOM1,
+  ROOM2,
+  GET_USER_DATA,
+  NOT_USER_DATA,
+  REQUEST_ERROR,
+  SET_USER_DATA,
+  REQUEST_START,
+  REQUEST_SUCCESS,
   INIT_USER_INFO,
-  SET_MSGS
+  SET_MSGS,
+  SET_MSG,
 } from "./action.js";
 
 const reducer = (state, action) => {
-
-  switch(action.type) {
+  switch (action.type) {
     case OPEN:
       return {
         ...state,
@@ -15,20 +24,20 @@ const reducer = (state, action) => {
         page: {
           ...state.page,
           main: {
-            isOpen: true
-          }
+            isOpen: true,
+          },
         },
         user: {
           ...state.user,
           isOpen: state.user.nickName ? false : true,
         },
-        prevAction: action.type
+        prevAction: action.type,
       };
     case CLOSE:
       return {
         ...state,
         isOpen: false,
-        prevAction: action.type
+        prevAction: action.type,
       };
     case INIT_USER_INFO:
       return {
@@ -38,9 +47,9 @@ const reducer = (state, action) => {
           socketId: action.payload.socketId,
           nickName: action.payload.nickName,
           id: action.payload.id,
-          role: action.payload.role
+          role: action.payload.role,
         },
-        prevAction: action.type
+        prevAction: action.type,
       };
     case MAIN:
       return {
@@ -57,35 +66,35 @@ const reducer = (state, action) => {
           room2: {
             ...state.page.room2,
             isOpen: false,
-          }
+          },
         },
         user: {
           ...state.user,
-          isOpen: state.user.nickName ? false : true
+          isOpen: state.user.nickName ? false : true,
         },
-        prevAction: action.type
+        prevAction: action.type,
       };
     case ROOM1:
       return {
         ...state,
         page: {
           main: {
-            isOpen: false
+            isOpen: false,
           },
           room1: {
             ...state.page.room1,
-            isOpen: true
+            isOpen: true,
           },
           room2: {
             ...state.page.room2,
-            isOpen: false
-          }
+            isOpen: false,
+          },
         },
         user: {
           ...state.user,
-          isOpen: state.user.nickName ? false : true
+          isOpen: state.user.nickName ? false : true,
         },
-        prevAction: action.type
+        prevAction: action.type,
       };
     case ROOM2:
       return {
@@ -100,34 +109,34 @@ const reducer = (state, action) => {
           },
           room2: {
             ...state.page.room2,
-            isOpen: true
-          }
+            isOpen: true,
+          },
         },
         user: {
           ...state.user,
-          isOpen: state.user.nickName ? false : true
+          isOpen: state.user.nickName ? false : true,
         },
-        prevAction: action.type
+        prevAction: action.type,
       };
     case REQUEST_START:
       return {
         ...state,
         isLoading: true,
-        prevAction: action.type
+        prevAction: action.type,
       };
     case REQUEST_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        prevAction: action.type
+        prevAction: action.type,
       };
     case GET_USER_DATA:
       return {
         ...state,
         user: {
-          ...action.payload
+          ...action.payload,
         },
-        prevAction: action.type
+        prevAction: action.type,
       };
     case SET_USER_DATA:
       return {
@@ -138,20 +147,20 @@ const reducer = (state, action) => {
           nickName: action.payload.nick_name,
           role: action.payload.role,
           socketId: action.payload.latest_connection_id,
-          isOpen: false
+          isOpen: false,
         },
-        prevAction: action.type
+        prevAction: action.type,
       };
     case NOT_USER_DATA:
       return {
         ...state,
-        prevAction: action.type
+        prevAction: action.type,
       };
     case REQUEST_ERROR:
       return {
         ...state,
         isLoading: false,
-        prevAction: action.type
+        prevAction: action.type,
       };
     case SET_MSGS:
       return {
@@ -162,11 +171,24 @@ const reducer = (state, action) => {
           ...state.page,
           [action.payload.roomType]: {
             ...state.page[action.payload.roomType],
-            msgList: action.payload.msgList
-          }
-        }
+            msgList: action.payload.msgList,
+          },
+        },
       };
-    default: 
+    case SET_MSG:
+      return {
+        ...state,
+        isLoading: false,
+        prevAction: action.type,
+        page: {
+          ...state.page,
+          [action.roomType]: {
+            ...state.page[action.roomType],
+            msgList: [...state.page[action.roomType].msgList, action.payload],
+          },
+        },
+      };
+    default:
       return state;
   }
 };
