@@ -144,10 +144,11 @@ const reducer = (state, action) => {
         isLoading: false,
         user: {
           ...state.user,
-          nickName: action.payload.nick_name,
-          role: action.payload.role,
-          socketId: action.payload.latest_connection_id,
-          isOpen: false,
+          ...action.payload,
+          // nickName: action.payload.nick_name,
+          // role: action.payload.role,
+          // socketId: action.payload.latest_connection_id,
+          // isOpen: false,
         },
         prevAction: action.type,
       };

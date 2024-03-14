@@ -52,3 +52,9 @@ export const setMsg = (data, roomType) => ({
 });
 export const getRoom1Data = (data) => ({ type: GET1DATA, payload: data });
 export const getRoom2Data = (data) => ({ type: GET2DATA, payload: data });
+
+export const getRoom1 = (store) => (dispatch) => (action) => {
+  store.dispatch(requestStart());
+  try {
+  } catch (e) {}
+};

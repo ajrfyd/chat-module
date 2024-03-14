@@ -1,9 +1,9 @@
 import { appendChild, addClass, createEl } from "../../js/utils.js";
-import { store } from "../../main.js";
-import { setMsg } from "../../js/action.js";
+import { store, chatStore } from "../../main.js";
 import { paintMsg } from "../../js/domController.js";
-import { url } from "../../js/api.js";
-import { sendMsg } from "../../js/api.js";
+import { sendMsgApi } from "../../js/api.js";
+import { sendMsg } from "../../js/utils.js";
+import { setMessage } from "../../store/chatAction.js";
 
 class InputSection {
   constructor($target, roomName) {
@@ -45,20 +45,27 @@ class InputSection {
       if (this.$input.value.length >= 1) this.$input.placeholder = "";
 
       const { value } = this.$input;
-      const { user } = store.getState();
+      // const { user } = store.getState();
+      // const chat = chatStore.getState();
+      try {
+        const { message, result } = await sendMsg(value);
+        if (message === "ok") {
+          // paintMsg(this.roomName, result);
+          chatStore.dispatch(setMessage(result, this.roomName));
+        }
+      } catch (e) {}
+      // const newMsg = {
+      //   socketId: "",
+      //   msg: value,
+      //   nickName: user.nickName,
+      //   roomType: this.roomName === "room1" ? "A" : "B",
+      // };
 
-      const newMsg = {
-        socketId: user.socketId,
-        msg: value,
-        nickName: user.nickName,
-        roomType: this.roomName === "room1" ? "A" : "B",
-      };
-
-      const result = await sendMsg(newMsg);
-      const { message, result: newMessage } = result;
-      if (message !== "ok") return alert(message);
-      paintMsg(this.roomName, newMessage);
-      store.dispatch(setMsg(newMessage, this.roomName));
+      // const result = await sendMsg(newMsg);
+      // const { message, result: newMessage } = result;
+      // if (message !== "ok") return alert(message);
+      // paintMsg(this.roomName,v newMessage);
+      // store.dispatch(setMsg(newMessage, this.roomName));
       this.$input.value = "";
       this.$input.focus();
     };

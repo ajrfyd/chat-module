@@ -1,6 +1,7 @@
 import { curry, go, map, filter, pipe, reduce, reject } from "fxjs";
-import { getUserInfo } from "./api.js";
+import { getUserInfo, sendMsgApi } from "./api.js";
 import { socketPugin } from "./socket.js";
+import { chatStore } from "../main.js";
 
 export const createEl = (tag) => document.createElement(tag);
 export const appendChild = curry((parent, child) => parent.appendChild(child));
@@ -72,4 +73,10 @@ export const createAtHandler = (date) => {
     dateStyle: "short",
     timeStyle: "short",
   }).format(new Date(date));
+};
+
+export const sendMsg = async (msg) => {
+  const { isOpen, selected, rooms } = chatStore.getState();
+  if (!isOpen) return;
+  return await sendMsgApi({ msg, roomId: rooms[selected].roomId });
 };

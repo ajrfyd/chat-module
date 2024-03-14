@@ -326,6 +326,7 @@ li {
 
 .chat-body .backdrop .backdrop-body {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   width: 100%;
   padding: 0 0.5rem;
@@ -347,7 +348,8 @@ li {
   /* color: #fff; */
 }
 
-.chat-body .backdrop .nickname-input {
+.chat-body .backdrop .nickname-input,
+.chat-body .backdrop .password-input {
   border: none;
   outline: none;
   padding: 0.5rem 1rem;
@@ -355,11 +357,36 @@ li {
   flex: 1;
 }
 
-.chat-body .backdrop .nickname-input:placeholder {
+.chat-body .backdrop .nickname-input:placeholder,
+.chat-body .backdrop .password-input:placeholder {
   color: red;
   /* display: none; */
 }
 
-.chat-body .backdrop .nickname-input.invalid::placeholder {
+.chat-body .backdrop .nickname-input.invalid::placeholder,
+.chat-body .backdrop .password-input.invalid::placeholder {
   color: red;
+}
+
+.chat-body .backdrop .select-btn-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-body .backdrop .select-btn-container .select-btn {
+  border: none;
+  outline: none;
+  /* background: var(--teal); */
+  color: var(black);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s 0.3s ease;
+}
+
+.chat-body .backdrop .select-btn-container .select-btn.regist.active,
+.chat-body .backdrop .select-btn-container .select-btn.login.active {
+  flex: 1;
+  color: var(--purple);
 }

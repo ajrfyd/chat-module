@@ -1,36 +1,21 @@
 const localUser = localStorage.getItem("user");
 const user = JSON.parse(localUser);
 
-const createStore = (reducer, ...middlewares) => {
+const createUserStore = (reducer, ...middlewares) => {
   let state = {
-    isOpen: false,
-    page: {
-      main: {
-        isOpen: false,
-      },
-      room1: {
-        isOpen: false,
-        msgList: [],
-      },
-      room2: {
-        isOpen: false,
-        msgList: [],
-      },
-    },
+    isLogin: false,
     user: {
-      isOpen: false,
       id: user?.id || null,
-      nickName: localStorage.getItem("nickName"),
-      role: "user",
-      latestConnectionId: null,
-      latestContactTime: null,
-      latestIp: null,
-      profileImgUrl: null,
-      status: "B",
-      updatedAt: null,
+      nickName: user?.nickName || null,
+      role: user?.role || "user",
+      latestConnectionId: user?.latestConnectionId || null,
+      latestContactTime: user?.latestContactTime || null,
+      latestIp: user?.latestIp || null,
+      profileImgUrl: user?.profileImgUrl || null,
+      status: user?.status || null,
+      updatedAt: user?.updatedAt || null,
     },
     isLoading: false,
-    prevAction: "",
   };
 
   const listener = [];
@@ -63,4 +48,4 @@ const createStore = (reducer, ...middlewares) => {
   };
 };
 
-export default createStore;
+export default createUserStore;
