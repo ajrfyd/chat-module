@@ -34,6 +34,13 @@ class Body {
   chatMaker(msgs) {
     const { id } = userStore.getState().user;
     const { selected } = chatStore.getState();
+    if (!msgs.length) {
+      return `
+        <div class="contents ${selected}">
+          <p>주고 받은 메세지가 없습니다.</p>
+        </div>
+      `;
+    }
     return `
       <div class="contents ${selected}">
         ${makeStrHtml(
