@@ -148,7 +148,7 @@ window.onload = (e) => {
     userStore.dispatch(setLogin());
     chatStore.dispatch(setRoomsThunk(user.id));
 
-    socket = io("http://localhost:5000", {
+    socket = io("https://chat.hkound.pe.kr", {
       transports: ["websocket"],
       auth: {
         nickName,
