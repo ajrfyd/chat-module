@@ -9,6 +9,7 @@ import {
   makeStrToEl,
   scrollToBottom,
   createAtHandler,
+  removeChild,
 } from "./utils.js";
 import { socketPlugin } from "./socket.js";
 import { store, userStore } from "../main.js";
@@ -249,10 +250,9 @@ export const removeShowClass = () => {
 };
 
 export const paintAlert = (el) => {
-  console.log(el);
   const alert = createEl("span");
   addClass(alert, "btn-alert");
   appendChild(el, alert);
 };
 
-export const removeAlert = () => {};
+export const removeAlert = (target, el) => removeChild(target, el);

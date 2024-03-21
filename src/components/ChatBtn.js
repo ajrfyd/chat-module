@@ -2,13 +2,13 @@ import {
   createEl,
   appendChild,
   addClass,
+  qs,
   removeChild,
-  addCssProperties,
 } from "../js/utils.js";
 import ChatContainer from "./ChatContainer.js";
 import { store, chatStore } from "../main.js";
 // import { chatClose, chatOpen } from "../js/action.js";
-import { menuActiveHandler } from "../js/domController.js";
+import { menuActiveHandler, removeAlert } from "../js/domController.js";
 import { chatOpen, chatClose } from "../store/chatAction.js";
 
 class ChatBtn {
@@ -44,6 +44,11 @@ class ChatBtn {
       ? chatStore.dispatch(chatOpen())
       : chatStore.dispatch(chatClose());
     menuActiveHandler("main");
+
+    if (this.state.isOpen) {
+      const alert = qs(".btn-alert");
+      if (alert) removeAlert(this.$btn, alert);
+    }
     // this.isOpened = !this.isOpened;
     // this.$chatContainer.fade(this.isOpened);
     // this.render();
