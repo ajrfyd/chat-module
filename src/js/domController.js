@@ -247,3 +247,12 @@ export const addSignupForm = ($target) => {
 export const removeShowClass = () => {
   qsa(".chat-room").forEach((r) => r.classList.remove("show"));
 };
+
+export const paintAlert = (el) => {
+  console.log(el);
+  const alert = createEl("span");
+  addClass(alert, "btn-alert");
+  appendChild(el, alert);
+};
+
+export const removeAlert = () => {};

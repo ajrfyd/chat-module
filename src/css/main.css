@@ -32,6 +32,17 @@ li {
   transition: all 0.2s 0.1s ease;
 }
 
+.btn-alert {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid red;
+  border-radius: 50%;
+  background-color: red;
+}
+
 .chat-btn.active {
   background: var(--btn-x-url);
   background-position: center;
