@@ -53,8 +53,8 @@ window.onload = (e) => {
       const target = targetObj[0].purposeType === "A" ? "room1" : "room2";
       dispatch(setMessage(msg, target));
       //& 채팅 방에 들어 가기 전에는 .contents가 없다.
-      if (!qs(".contents")) return;
       if (!isOpen) paintAlert(qs(".chat-btn"));
+      if (!qs(".contents")) return;
       paintMsg(target, msg);
     });
   }
