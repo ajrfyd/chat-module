@@ -1,16 +1,17 @@
 import { userStore } from "../main.js";
 import { setLogout } from "../store/userActions.js";
+import { endPoint } from "./constants.js";
 
 const url = "https://chat.hkound.pe.kr";
 // export const url = "http://localhost:5000";
 
 export const getUserInfo = async (nickName) =>
-  await fetch(`${url}/user/search/${nickName}`)
+  await fetch(`${endPoint}/user/search/${nickName}`)
     .then((res) => res.json())
     .catch((e) => console.log(e, "ajahjahah"));
 
 export const sendMsgApi = async (newMsg) => {
-  return await fetch(`${url}/api/chat/send`, {
+  return await fetch(`${endPoint}/api/chat/send`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -21,7 +22,7 @@ export const sendMsgApi = async (newMsg) => {
 };
 
 export const signUp = async (nickName, password) => {
-  return await fetch(`${url}/api/auth/signup`, {
+  return await fetch(`${endPoint}/api/auth/signup`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -35,7 +36,7 @@ export const signUp = async (nickName, password) => {
 };
 
 export const signHandler = async (nickName, password, type) => {
-  return await fetch(`${url}/api/auth/${type}`, {
+  return await fetch(`${endPoint}/api/auth/${type}`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -50,7 +51,7 @@ export const signHandler = async (nickName, password, type) => {
 };
 
 export const findOrCreateRoom = async (id) => {
-  return await fetch(`${url}/api/chat/${id}`, {
+  return await fetch(`${endPoint}/api/chat/${id}`, {
     method: "get",
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +60,7 @@ export const findOrCreateRoom = async (id) => {
 };
 
 export const getRooms = async (id) => {
-  return await fetch(`${url}/api/chat/${id}`, {
+  return await fetch(`${endPoint}/api/chat/${id}`, {
     method: "get",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +69,7 @@ export const getRooms = async (id) => {
 };
 
 export const getRoomsById = async (id) => {
-  return await fetch(`${url}/api/room`, {
+  return await fetch(`${endPoint}/api/room`, {
     method: "get",
     headers: {
       "Content-Type": "application/json",
@@ -88,7 +89,7 @@ export const getRoomsById = async (id) => {
 };
 
 export const getRoomByType = async (roomType) => {
-  return await fetch(`${url}/api/room/${roomType}`, {
+  return await fetch(`${endPoint}/api/room/${roomType}`, {
     method: "get",
     headers: {
       "Content-Type": "application/json",
