@@ -47,6 +47,7 @@ window.onload = (e) => {
       const {
         rooms: { room1, room2 },
         isOpen,
+        selected,
       } = getState();
       const targetObj = [room1, room2].filter((room) => room.roomId === roomId);
       if (!targetObj.length) return dispatch(requestDone());
@@ -57,8 +58,10 @@ window.onload = (e) => {
       if (!isOpen) paintAlert(qs(".chat-btn"));
 
       //^ nav-alert
+      //Todo 방에 들어와 있는 상태로 내가 보낸 메세지에는 표시 ㄴㄴ
       const navAlert = qs(`.menu-item.${target} .nav-alert`);
-      if (!navAlert) paintAlertForNav(qs(`.menu-item.${target}`));
+      if (!navAlert && target !== selected)
+        paintAlertForNav(qs(`.menu-item.${target}`));
       //& 채팅 방에 들어 가기 전에는 .contents가 없다.
       if (!qs(".contents")) return;
       paintMsg(target, msg);
