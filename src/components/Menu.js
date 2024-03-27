@@ -4,12 +4,11 @@ import {
   addClass,
   createMenuItem,
   qsa,
+  qs,
 } from "../js/utils.js";
-import { chatStore, store, userStore } from "../main.js";
-import { selectMain, selectRoom1, selectRoom2 } from "../js/action.js";
+import { chatStore, userStore } from "../main.js";
 import MenuItem from "./MenuItem.js";
 import { reduce } from "fxjs";
-import { socketPlugin } from "../js/socket.js";
 import {
   removeChatRoom,
   menuActiveHandler,
@@ -36,6 +35,9 @@ class Menu {
       key: "room1",
       fn: (key) => {
         if (!userStore.getState().isLogin) return;
+        const newBtn = qs(`.menu-item.${key} .nav-alert`);
+        if (newBtn) newBtn.remove();
+
         menuActiveHandler(key);
         chatStore.dispatch(selectRoom(key));
         removeShowClass();
@@ -49,6 +51,9 @@ class Menu {
       key: "room2",
       fn: (key) => {
         if (!userStore.getState().isLogin) return;
+        const newBtn = qs(`.menu-item.${key} .nav-alert`);
+        if (newBtn) newBtn.remove();
+
         menuActiveHandler(key);
         chatStore.dispatch(selectRoom(key));
         removeShowClass();

@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 import { qs } from "./utils.js";
 import { store } from "../main.js";
-import { paintMsg, paintAlert } from "../js/domController.js";
+import { paintMsg, paintAlert, paintAlertForNav } from "../js/domController.js";
 import { chatStore, userStore } from "../main.js";
 import { setRoomsThunk, setMessage, requestDone } from "../store/chatAction.js";
 import { setLogin } from "../store/userActions.js";
@@ -52,13 +52,23 @@ window.onload = (e) => {
       if (!targetObj.length) return dispatch(requestDone());
       const target = targetObj[0].purposeType === "A" ? "room1" : "room2";
       dispatch(setMessage(msg, target));
-      //& 채팅 방에 들어 가기 전에는 .contents가 없다.
+
+      //* new msg alert for btn
       if (!isOpen) paintAlert(qs(".chat-btn"));
+
+      //^ nav-alert
+      const navAlert = qs(`.menu-item.${target} .nav-alert`);
+      if (!navAlert) paintAlertForNav(qs(`.menu-item.${target}`));
+      //& 채팅 방에 들어 가기 전에는 .contents가 없다.
       if (!qs(".contents")) return;
       paintMsg(target, msg);
     });
   }
+  // if (qs(".menu-item.room1")) {
+  paintAlertForNav(qs(".menu-item.room1"));
+  paintAlertForNav(qs(".menu-item.room2"));
 
+  // }
   // paintAlert(qs(".chat-btn"));
 };
 

@@ -108,6 +108,7 @@ li {
   font-weight: bold;
   font-size: 1rem;
   color: #8c8c8d;
+  position: relative;
 }
 
 .menu-item.active {
@@ -116,6 +117,20 @@ li {
 
 .menu-item:hover {
   color: #676aec;
+}
+.menu-item > .nav-alert {
+  position: absolute;
+  /* border: 1px solid red; */
+  background: red;
+  /* width: 10px; */
+  /* height: 10px; */
+  padding: 0 5px;
+  top: 0;
+  right: 5px;
+  border-radius: 5px;
+  /* color: yellow; */
+  transition: 0.1s;
+  animation: blink 1s ease infinite;
 }
 
 .chat-main {
@@ -400,4 +415,16 @@ li {
 .chat-body .backdrop .select-btn-container .select-btn.login.active {
   flex: 1;
   color: var(--purple);
+}
+
+@keyframes blink {
+  0% {
+    color: transparent;
+  }
+  50% {
+    color: yellow;
+  }
+  100% {
+    color: transparent;
+  }
 }

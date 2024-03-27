@@ -255,4 +255,11 @@ export const paintAlert = (el) => {
   appendChild(el, alert);
 };
 
+export const paintAlertForNav = (el) => {
+  const alert = createEl("span");
+  alert.innerText = "new";
+  addClass(alert, "nav-alert");
+  appendChild(el, alert);
+};
+
 export const removeAlert = (target, el) => removeChild(target, el);
