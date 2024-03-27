@@ -65,8 +65,6 @@ window.onload = (e) => {
     });
   }
   // if (qs(".menu-item.room1")) {
-  paintAlertForNav(qs(".menu-item.room1"));
-  paintAlertForNav(qs(".menu-item.room2"));
 
   // }
   // paintAlert(qs(".chat-btn"));
