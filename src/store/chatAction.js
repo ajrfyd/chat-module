@@ -27,7 +27,6 @@ export const setRoomsThunk = (id) => async (dispatch) => {
   dispatch(request());
   try {
     const { result, status } = await getRoomsById(id);
-    console.log(result, "aaa");
     // console.log(result, "Pre setRooms");
     // if (!result.length) return dispatch(requestDone());
     dispatch(setRooms(result));
@@ -54,7 +53,7 @@ export const selectRoom = (roomType) => async (dispatch) => {
     );
     dispatch(setRoom(result, roomType));
   } catch (e) {
-    console.log(e, "<<<<<<,");
+    console.log(e, "Select Room Error");
     dispatch(requestDone());
   }
 };
