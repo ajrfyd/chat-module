@@ -8,7 +8,7 @@ const url = "https://chat.hkound.pe.kr";
 export const getUserInfo = async (nickName) =>
   await fetch(`${endPoint}/user/search/${nickName}`)
     .then((res) => res.json())
-    .catch((e) => console.log(e, "ajahjahah"));
+    .catch((e) => console.log(e, "Get UserInfo Error"));
 
 export const sendMsgApi = async (newMsg) => {
   return await fetch(`${endPoint}/api/chat/send`, {
@@ -76,7 +76,6 @@ export const getRoomsById = async (id) => {
     },
     credentials: "include",
   })
-    .then((res) => (console.log(res), res))
     .then((res) => res.json())
     .then((result) => {
       if (result.message !== "ok") {
@@ -85,7 +84,7 @@ export const getRoomsById = async (id) => {
       }
       return result;
     })
-    .catch((e) => console.log(e, "ajnhshdjdmdm"));
+    .catch((e) => console.log(e, `Get Room Error`));
 };
 
 export const getRoomByType = async (roomType) => {

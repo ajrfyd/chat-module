@@ -112,7 +112,7 @@ export const removeChatRoom = (key) => {
 export const paintMsg = (key, data) => {
   const $target = qs(`.contents.${key}`);
   // console.log(qs(`.contents.${key}`), "!!!!!!!!!!")
-  console.log("paint!!!");
+  // console.log("paint!!!");
   const { id } = userStore.getState().user;
   const msgStr = `
     <div class="chat-content-body ${
